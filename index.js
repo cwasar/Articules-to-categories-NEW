@@ -179,14 +179,19 @@ function renderLists(data) {
 $btn2.addEventListener('click', showDublicate)
 
 function showDublicate() {
-    const arr =  $articulesList.childNodes
-    let res = []
-    Array.from(arr).filter(item => {res.push(item.textContent)})
-    let uniq = new Set([...res])
-    res.map(item => {
-        if(item.contains(uniq)) {
-            item.classList.add('uniq')
-        }
+    const arr =  $articulesList.children
+    const newArr = Array.from(arr).map(item => {return item.innerText})
+    console.log(newArr);
+    let set = new Set(newArr)
+    let res = Array.from(set)
+    console.log(res);
+
+   Array.from(arr).map(item => {
+       for(let i = 0; i < set.length; i++) {
+           if (item.innerText === set[i]) {
+               item.classList.add('uniq')
+           }
+       }
+   })
         
-    })
 }
